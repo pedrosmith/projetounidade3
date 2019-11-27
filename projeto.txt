@@ -1,0 +1,153 @@
+#include <stdio.h>
+void main()
+#define TAMNOME 50
+#define ANDCERTO 2
+#define NANDCERTO 2
+#define NORCERTO 0
+#define XORCERTO 1
+#define XNORCERTO 1
+#define TRUE 1
+{
+    int entrada1, entrada2, saida, i, local1, local2,h, input=0;
+    char nome[TAMNOME], resultados[10];
+    char endereco[70];
+    for (i=0;i<=10;i++) {
+        resultados[i]=0;
+    }
+    puts("Digite o endereço completo do arquivo");
+    scanf("%s", &endereco);
+
+    FILE* arqNome=fopen(endereco, "r");
+    //FILE* arqNome=fopen("C:/Users/G/Desktop/nomes.txt", "r");
+
+    while (fscanf(arqNome, "%s %d %d %d", nome, &entrada1, &entrada2, &saida)!=EOF) {
+        local1=resultados[entrada1];
+        local2=resultados[entrada2];
+        for (i=0;i<=TAMNOME;i++) {
+            //O do AND TÁ OK
+            if(nome[i]=='A' && nome[i+1]=='N' && nome[i+2]=='d' && nome[i-1]!='N'){
+                if(local1+local2==ANDCERTO){
+                    resultados[saida]=1;
+                }
+                else {
+                    resultados[saida]=0;
+                }
+            }
+            //O do OR TÁ OK
+            if(nome[i]=='O' && nome[i+1]=='R' && nome[i-1]!='X' && nome[i-1]!='N'){
+                if(local1+local2>=1){
+                    resultados[saida]=1;
+                    printf("krl");
+                }
+                else {
+                    resultados[saida]=0;
+                }
+            }
+            //A PARTI DAQUI É SÓ TEORIA KKK
+            // NAND TÁ "CERTO"
+            if(nome[i]=='N' && nome[i+1]=='A' && nome[i+2]=='N' && nome[i+3]=='D'){
+                if(local1+local2==NANDCERTO){
+                    resultados[saida]=0;
+                }
+                else {
+                    resultados[saida]=1;
+                }
+            }
+            // NOR CERTO
+            if(nome[i]=='N' && nome[i+1]=='O' && nome[i+2]=='R'){
+                if(local1+local2==NORCERTO){
+                    resultados[saida]=1;
+                }
+                else {
+                    resultados[saida]=0;
+                }
+            }
+            // XOR CERTO
+            if(nome[i]=='X' && nome[i+1]=='O' && nome[i+2]=='R'){
+                if(local1+local2==XORCERTO){
+                    resultados[saida]=1;
+                }
+                else {
+                    resultados[saida]=0;
+                }
+            }
+            if(nome[i]=='X' && nome[i+1]=='N' && nome[i+2]=='0' && nome[i+3]){
+                if(local1+local2==XNORCERTO){
+                    resultados[saida]=0;
+                }
+                else {
+                    resultados[saida]=1;
+                }
+            }
+            if(nome[i]=='N' && nome[i+1]=='O' && nome[i+2]=='T' && nome[i+3]){
+                if(local1==TRUE){
+                    resultados[saida]=0;
+                }
+                else {
+                    resultados[saida]=1;
+                }
+            }
+            if(nome[i]=='I' && nome[i+1]=='N' && nome[i+2]=='P'&& nome[i+3]=='U' && nome[i+4]=='T'){
+                input++;
+            }
+            if(nome[i]=='O' && nome[i+1]=='U' && nome[i+2]=='T' && nome[i+3]=='P' && nome[i+4]=='U' && nome[i+5]=='T'){
+                if(local1==TRUE){
+                    h=1;
+                }
+                else {
+                    h=0;
+                }
+            }
+
+        }
+        printf("%s %d %d %d\n", nome, entrada1, entrada2, saida);
+
+    }
+    printf("h=%d NdeImput=%d\n", h, input);
+    printf("resultados[3]=%d", resultados[3]);
+    int qnt,j;
+    qnt=input; //trocar qnt por input dps
+
+    int entrada;
+    char vet[26];
+
+
+    for(entrada = 0; entrada < (pow(2,qnt)); entrada++) {
+        vet[0 ] = (entrada & 1       )?1:0;      /*   // x ? a:b <=> if(x) a; else b;*/
+        vet[1 ] = (entrada & 2       )?1:0;      /*   // inline if*/
+        vet[2 ] = (entrada & 4       )?1:0;
+        vet[3 ] = (entrada & 8       )?1:0;
+        vet[4 ] = (entrada & 16      )?1:0;
+        vet[5 ] = (entrada & 32      )?1:0;
+        vet[6 ] = (entrada & 64      )?1:0;
+        vet[7 ] = (entrada & 128     )?1:0;
+        vet[8 ] = (entrada & 256     )?1:0;
+        vet[9 ] = (entrada & 512     )?1:0;
+        vet[10] = (entrada & 1024    )?1:0;
+        vet[11] = (entrada & 2048    )?1:0;
+        vet[12] = (entrada & 4096    )?1:0;
+        vet[13] = (entrada & 8192    )?1:0;
+        vet[14] = (entrada & 16384   )?1:0;
+        vet[15] = (entrada & 32768   )?1:0;
+        vet[16] = (entrada & 65536   )?1:0;
+        vet[17] = (entrada & 131072  )?1:0;
+        vet[18] = (entrada & 262144  )?1:0;
+        vet[19] = (entrada & 524288  )?1:0;
+        vet[20] = (entrada & 1048576 )?1:0;
+        vet[21] = (entrada & 2097152 )?1:0;
+        vet[22] = (entrada & 4194304 )?1:0;
+        vet[23] = (entrada & 8388608 )?1:0;
+        vet[24] = (entrada & 16777216)?1:0;
+        vet[25] = (entrada & 33554432)?1:0;
+        printf("  ");
+        for(j=0;j<qnt;j++){
+            printf("%d ",vet[j]);
+        }
+        printf("%d",h);
+        printf("\n");
+
+        //
+
+        fclose(arqNome);
+    }
+}
