@@ -81,13 +81,12 @@ int main()
             if(nome[i]=='O' && nome[i+1]=='R' && nome[i-1]!='X' && nome[i-1]!='N'){
                 if(local1+local2>=1){
                     resultados[saida]=1;
-                    printf("krl");
                 }
                 else {
                     resultados[saida]=0;
                 }
             }
-            //A PARTI DAQUI É SÓ TEORIA KKK
+           
             // NAND TÁ "CERTO"
             if(nome[i]=='N' && nome[i+1]=='A' && nome[i+2]=='N' && nome[i+3]=='D'){
                 if(local1+local2==NANDCERTO){
