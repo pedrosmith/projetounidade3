@@ -56,91 +56,81 @@ int main()
     int entrada1, entrada2, saida, i, local1, local2,h, input=0;
     char nome[TAMNOME], resultados[10];
     char endereco[70];
-    char calculo [150] [2];
-    int circ=0;
-
     for (i=0;i<=10;i++) {
         resultados[i]=0;
     }
+    resultados[i]=0;
     puts("Digite o endereço completo do arquivo");
-    scanf("%s", &endereco);
-    
-int aux=input;
-
+    scanf("%s", endereco);
 
     FILE* arqNome=fopen(endereco, "r");
-    while (fscanf(arqNome, "%s %d %d %d", nome, &calculo[i] [0], &calculo[i] [1], &calculo[i] [2])!=EOF) {
+    while (fscanf(arqNome, "%s %d %d %d", nome, &entrada1, &entrada2, &saida)!=EOF) {
         local1=resultados[entrada1];
         local2=resultados[entrada2];
         for (i=0;i<=TAMNOME;i++) {
             //O do AND TÁ OK
             if(nome[i]=='A' && nome[i+1]=='N' && nome[i+2]=='d' && nome[i-1]!='N'){
                 if(local1+local2==ANDCERTO){
-                    calculo[i] [2]=1;
+                    resultados[saida]=1;
                 }
                 else {
-                     calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
             }
             //O do OR TÁ OK
             if(nome[i]=='O' && nome[i+1]=='R' && nome[i-1]!='X' && nome[i-1]!='N'){
                 if(local1+local2>=1){
-                     calculo[i] [2]=1;
+                    resultados[saida]=1;
                     printf("krl");
                 }
                 else {
-                     calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
             }
             //A PARTI DAQUI É SÓ TEORIA KKK
             // NAND TÁ "CERTO"
             if(nome[i]=='N' && nome[i+1]=='A' && nome[i+2]=='N' && nome[i+3]=='D'){
                 if(local1+local2==NANDCERTO){
-                     calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
                 else {
-                     calculo[i] [2]=1;
+                    resultados[saida]=1;
                 }
             }
             // NOR CERTO
             if(nome[i]=='N' && nome[i+1]=='O' && nome[i+2]=='R'){
                 if(local1+local2==NORCERTO){
-                     calculo[i] [2]=1;
+                    resultados[saida]=1;
                 }
                 else {
-                    calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
             }
             // XOR CERTO
             if(nome[i]=='X' && nome[i+1]=='O' && nome[i+2]=='R'){
                 if(local1+local2==XORCERTO){
-                     calculo[i] [2]=1;
+                    resultados[saida]=1;
                 }
                 else {
-                     calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
             }
             if(nome[i]=='X' && nome[i+1]=='N' && nome[i+2]=='0' && nome[i+3]){
                 if(local1+local2==XNORCERTO){
-                     calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
                 else {
-                    calculo[i] [2]=1;
+                    resultados[saida]=1;
                 }
             }
             if(nome[i]=='N' && nome[i+1]=='O' && nome[i+2]=='T' && nome[i+3]){
                 if(local1==TRUE){
-                     calculo[i] [2]=0;
+                    resultados[saida]=0;
                 }
                 else {
-                     calculo[i] [2]=1;
+                    resultados[saida]=1;
                 }
-                
             }
-            
-           	if(nome[i]=='C' && nome[i+1]=='I' && nome[i+2]=='R' &&nome [i+3]=='C' &&nome[i-1] !='N'){ //AQRRQ
-						circ=1;}
-						
             if(nome[i]=='I' && nome[i+1]=='N' && nome[i+2]=='P'&& nome[i+3]=='U' && nome[i+4]=='T'){
                 input++;
             }
@@ -154,34 +144,7 @@ int aux=input;
             }
 
         }
-        //-------------------------------
-        	if(input>aux){			//PRINTA o inpt e o output direitinho
-			
-
-		printf("\n%s %d  ",nome, calculo[i] [0]);			
-		fgets(nome, 100, arqNome);	
-		printf("%s",nome);		 
-
-		
-	}			
-	 else{
-	 	
-	 	if(circ==1){											//QUANDO DETECTAR CIRCUIT PRINTAR O NOME
-	 		 fgets(nome, 100, arqNome);{			 
-	 		
-	 		printf("\n CIRCUIT %s  ",nome);
-	 	}
-		 }
-	 	
-
-	else{
-			
-		printf("\n%s %d %d %d", nome, calculo[i] [0], calculo[i] [1], calculo[i] [2]);		//PARA CASOS NORMAIS
-		aux=input;}   
-		}
- circ=0;//AQ
- 
- //-----------------------------------------------------
+        printf("%s %d %d %d\n", nome, entrada1, entrada2, saida);
 
     }
     int qnt,j;
